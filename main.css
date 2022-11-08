@@ -1,0 +1,70 @@
+:root {
+	--black:  #303030;
+	--orange: #ffb641;
+}
+
+body {
+	background: var(--black);
+}
+
+button {
+	background: var(--black);
+	border-color: var(--orange);
+	border-width: 1.5px;
+	padding: 10px;
+	color: var(--orange);
+}
+
+button:hover {
+	background: var(--orange);
+	color: var(--black);
+}
+
+.box {
+	display: flex;
+	width: 200px;
+	height: 200px;
+}
+
+.wide {
+	height: 30px;
+	line-height: 30px;
+	width: 100%;
+/*	display: inline-flex;*/
+}
+
+.feed {
+	background-color: blue;
+}
+
+.upcoming {
+	background-color: red;
+}
+
+.ticker {
+	background-color: var(--orange);
+	color: var(--black);
+	overflow: hidden;
+}
+
+@keyframes ticker-horizontal {
+	0% { left: 0; } /* FIRST ITEM */
+  	30% { left: 30px; } /* SECOND ITEM */
+  	60% { left: 60px; } /* THIRD ITEM */
+  	90% { left: 90px; } /* FORTH ITEM */
+  	100% { left: 0; } /* BACK TO FIRST */
+}
+
+.ticker-item {
+	text-align: center;
+	padding-left: 7px;
+	padding-right: 7px;
+	animation-name: ticker-horizontal;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(1, 0, .5, 0);
+}
+
+.ticker-item:hover {
+	animation-play-state: paused;
+}
