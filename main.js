@@ -42,6 +42,7 @@ function get_current_tokens() {
 	return parseInt(localStorage.getItem(tokens));
 }
 
+// dynamically create betting form
 function betting_form(race) {
 	writeln(betting, `<h3>Race ${curr_race + 1}</h3>`);
 	betting.innerHTML = "<form>";
@@ -58,6 +59,7 @@ function betting_form(race) {
 	betting.innerHTML += `<button onclick='process_bet()'>Place Bet</button>`;
 }
 
+// function to check if bet is valid and then process funds
 function process_bet() {
 	let sum = 0;
 	let currval;
@@ -84,23 +86,25 @@ function process_bet() {
 
 }
 
+// function for paying out any winnings
 function payout_race(race_results) {
 	for (let i=0; i<race_results.length; i++){
 		switch (race_results[i].bet_position) {
-			case 1: addTokens(race_results[i].bet_amount);
+			case 1: addTokens(race_results[i].bet_amount*2);
 			break;
-			case 2: addTokens(race_results[i].bet_amount*.75);
+			case 2: addTokens(race_results[i].bet_amount*.175);
 			break;
-			case 3: addTokens(race_results[i].bet_amount*.5);
+			case 3: addTokens(race_results[i].bet_amount*1.5);
 			break;
 		}
 	};
 }
 
+// function for performing the race and narrating to feed
 function runRace(race) {
 	writeln(feed, "<br/>It's time! Ladies and gentlemen, here is your line-up!");
 	race.forEach((horse)=>{
-		writeln(upcoming, horse['name']);
+		writeln(feed, horse.name);
 	});
 	writeln(feed, "<br/>And we are off!")
 	for (i=0; i<segments-1; i++) {
@@ -119,9 +123,9 @@ function runRace(race) {
 	writeln(feed, "And there we have it, folks!");
 	writeln(feed, `And the winner is... ${race[0].name} is the winner! ${race[1].name} is in second and ${race[2].name} rounds it out in third.`);
 	writeln(feed, "Here are the final standings:");
-	race.forEach((horse)=>{
-		writeln(upcoming, horse['name']);
-	});
+	for (let i = 0; i < race.length; i++) {
+		writeln(feed, `${i+1}-${race[i].name}`);
+	}
 	payout_race(race);
 	// document.getElementById(`race-${curr_race}`).style.text-decoration = "line-through";
 	curr_race++;
