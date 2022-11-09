@@ -1,8 +1,17 @@
+/*<!-- Zachary Brasseaux -->
+<!-- Partner - Josue Gaona -->
+<!-- 102-52-903 -->
+<!-- CSC 557 - Web Dev -->
+<!-- General Project -->*/
+
 // get html fields for editing
 const upcoming = document.getElementById('upcoming');
 const feed = document.getElementById('feed');
 const betting = document.getElementById('betting');
 const tokenField = document.getElementById('tokens');
+
+// get html ticker fields
+const ticker_race = [document.getElementById('race_0'),document.getElementById('race_1'),document.getElementById('race_2')];
 
 // store user tokend
 const tokens = "tokens";
@@ -137,6 +146,7 @@ function runRace(race) {
 	for (let i = 0; i < race.length; i++) {
 		writeln(feed, `${i+1}-${race[i].name}`);
 	}
+	ticker_race[curr_race].innerHTML = `Race 1 - 1st ${race[0].name}, 2nd ${race[1].name}, 3rd ${race[2].name}.`
 	payout_race(race); // payout any winnings
 	curr_race++; //increment current race
 	betting_form(races[curr_race]); // new betting form
@@ -162,4 +172,11 @@ for (var i = 0; i < races.length; i++) {
 }
 
 betting_form(races[curr_race]);
+
+ticker_race[0].innerHTML += "Race 1 - "
+races[0].forEach((horse) => {ticker_race[0].innerHTML += `${horse.name} `});
+ticker_race[1].innerHTML += "Race 2 - "
+races[1].forEach((horse) => {ticker_race[1].innerHTML += `${horse.name} `});
+ticker_race[2].innerHTML += "Race 3 - "
+races[2].forEach((horse) => {ticker_race[2].innerHTML += `${horse.name} `});
 
