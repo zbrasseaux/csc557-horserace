@@ -1,22 +1,28 @@
-module.exports = [
+const horses = [
 	{
 		name:"Orb",
-		avg_speed: 25,
+		avg_speed: 21,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 1
 	},{
 		name:"Electric Newton",
-		avg_speed: 25,
+		avg_speed: 20,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 2
 	},{
 		name:"Fig Tree Fire",
-		avg_speed: 25,
+		avg_speed: 37,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 3
@@ -24,27 +30,35 @@ module.exports = [
 		name:"Old Domino",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 4
 	},{
 		name:"Abandoned Pizza Hut",
-		avg_speed: 25,
+		avg_speed: 22,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 5
 	},{
 		name:"Django Django Django",
-		avg_speed: 25,
+		avg_speed: 23,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 6
 	},{
 		name:"Green Clown",
-		avg_speed: 25,
+		avg_speed: 23,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 7
@@ -52,6 +66,8 @@ module.exports = [
 		name:"Dining Room Table",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 8
@@ -59,27 +75,35 @@ module.exports = [
 		name:"Icecream Sundae",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 9
 	},{
 		name:"Chili Dog",
-		avg_speed: 25,
+		avg_speed: 28,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 10
 	},{
 		name:"Day Old Coffe Grounds",
-		avg_speed: 25,
+		avg_speed: 27,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 11
 	},{
 		name:"First Day of Spring",
-		avg_speed: 25,
+		avg_speed: 26,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 12
@@ -87,6 +111,8 @@ module.exports = [
 		name:"Fried Chicken Nightmare",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 13
@@ -94,6 +120,8 @@ module.exports = [
 		name:"Here's Johnny",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 14
@@ -101,6 +129,8 @@ module.exports = [
 		name:"Saturday Morning Cartoons",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 15
@@ -108,6 +138,8 @@ module.exports = [
 		name:"Brand New Backpack",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 16
@@ -115,6 +147,8 @@ module.exports = [
 		name:"Open Secret",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 17
@@ -122,6 +156,8 @@ module.exports = [
 		name:"Plastic Bag",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 18
@@ -129,6 +165,8 @@ module.exports = [
 		name:"Courtroom Jester",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 19
@@ -136,6 +174,8 @@ module.exports = [
 		name:"Steve McQueen's Good Knee",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 20
@@ -143,6 +183,8 @@ module.exports = [
 		name:"Little Sally Walker",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 21
@@ -150,6 +192,8 @@ module.exports = [
 		name:"Jolly Blue Giant",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 22
@@ -157,6 +201,8 @@ module.exports = [
 		name:"Hopscotch",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 23
@@ -164,7 +210,9 @@ module.exports = [
 		name:"Garlic Parmesean",
 		avg_speed: 25,
 		color:"brown",
+		bet_position: 0,
+		bet_amount: 0,
 		speed_range: 5,
 		race_position:0,
 		endurance_factor: 24
-}];
+}].sort(() => (Math.random() > .5) ? 1 : -1);;
