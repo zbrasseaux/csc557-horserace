@@ -24,10 +24,66 @@ function renderTokens() {
 }
 
 function addTokens(amount) {
-	const fromLocal = localStorage.getItem(tokens);
+	const fromLocal = get_current_tokens();
 	localStorage.setItem(tokens, fromLocal + amount);
 	renderTokens();
 } 
+
+function get_current_tokens() {
+	return localStorage.getItem(tokens)
+}
+
+function betting_form(race) {
+	writeln(betting, `<h3>Race ${curr_race + 1}</h3>`);
+	betting.innerHTML = "<form>";
+	let i=0;
+	race.forEach((horse) => {
+		writeln(betting, `${horse.name} 
+			<input type="radio" name="horse-${i}" id="rd${i}-1" value="1"/> 1st
+			<input type="radio" name="horse-${i}" id="rd${i}-2" value="2"/> 2nd
+			<input type="radio" name="horse-${i}" id="rd${i}-3" value="3"/> 3rd
+			<input type="number" id="horse-${i}-bet">`);
+		i++;
+	});
+	betting.innerHTML += "</form>";
+	betting.innerHTML += `<button onclick='process_bet(${races[curr_race]})'>Place Bet</button>`;
+}
+
+function process_bet(race) {
+	let sum = 0;
+	let currval;
+	let grp_elements;
+	for (let i = 0; i<race.length; i++) {
+		currval = document.getElementById(`horse-${i}-bet`).value;
+		sum += currval;
+		race[i].bet_amount = currval;
+		grp_elements = getElementsByName(`horse-${i}`);
+		for(j = 0; j < grp_elements.length; j++) {
+                if(grp_elements[j].checked)
+	                race[i].bet_position = grp_elements[j].value;
+        }
+	}
+	if (sum < get_current_tokens()) {
+		writeln(betting, "Bets exceed current funds.");
+		return;
+	} else {
+		runRace(race);
+	}
+
+}
+
+function payout_race(race_results) {
+	for (let i=0; i<race_results.length; i++){
+		switch (race_results[i].bet_position) {
+			case 1: addTokens(race_results[i].bet_amount);
+			break;
+			case 2: addTokens(race_results[i].bet_amount*.75);
+			break;
+			case 3: addTokens(race_results[i].bet_amount*.5);
+			break;
+		}
+	};
+}
 
 function runRace(race) {
 	writeln(feed, "<br/>It's time! Ladies and gentlemen, here is your line-up!");
@@ -38,7 +94,7 @@ function runRace(race) {
 	for (i=0; i<segments-1; i++) {
 		race.forEach((horse) => {
 			horse.race_position += horse.avg_speed + (Math.random* (2*horse.speed_range)-horse.speed_range) - ((horse.endurance_factor/25)*(i/segments));
-		};
+		});
 
 		race.sort((horse_a, horse_b) => (horse_b.race_position - horse_a.race_position));
 
@@ -46,7 +102,7 @@ function runRace(race) {
 	}
 	race.forEach((horse) => {
 			horse.race_position += horse.avg_speed + (Math.random* (2*horse.speed_range)-horse.speed_range) - ((horse.endurance_factor/25)*(i/segments));
-	};
+	});
 	race.sort((horse_a, horse_b) => (horse_b.race_position - horse_a.race_position));
 	writeln(feed, "And there we have it, folks!");
 	writeln(feed, `And the winner is... ${race[0]} is the winner! ${race[1]} is in second and ${race[2]} rounds it out in third.`);
@@ -54,6 +110,10 @@ function runRace(race) {
 	race.forEach((horse)=>{
 		writeln(upcoming, horse['name']);
 	});
+	payout_race(race);
+	// document.getElementById(`race-${curr_race}`).style.text-decoration = "line-through";
+	curr_race++;
+	betting_form(races[curr_race]);
 }
 
 renderTokens();
@@ -65,7 +125,7 @@ writeln(feed, "To the right is our betting portal, where you can place your bets
 writeln(feed, "Good luck!");
 
 for (var i = 0; i < races.length; i++) {
-	upcoming.innerHTML += `<div class="race-${i}"><h3>Race ${i+1}</h3>`
+	upcoming.innerHTML += `<div id="race-${i}"><h3>Race ${i+1}</h3>`
 
 	races[i].forEach((horse)=>{
 		writeln(upcoming, horse['name']);
@@ -73,3 +133,6 @@ for (var i = 0; i < races.length; i++) {
 
 	upcoming.innerHTML += `</div>`
 }
+
+betting_form(races[curr_race]);
+
