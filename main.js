@@ -1,19 +1,26 @@
+// get html fields for editing
 const upcoming = document.getElementById('upcoming');
 const feed = document.getElementById('feed');
 const betting = document.getElementById('betting');
 const tokenField = document.getElementById('tokens');
 
+// store user tokend
 const tokens = "tokens";
 localStorage.setItem(tokens, 500);
 
+// empty race arrs
 const races = [[],[],[]];
+// race segments
 const segments = 20;
+// current race - 1
 let curr_race = 0;
 
+// divide races
 for (let i=0; i<horses.length; i++) {
 	races[i%3].push(horses[i]);
 }
 
+// method to get more money
 function replenishFunds() {
 	if (get_current_tokens() < 100) {
 		writeln(feed, "You take out another mortgage on your home to pay for more bets.")
@@ -23,21 +30,25 @@ function replenishFunds() {
 	}
 }
 
+// function to easily write text to a field
 function writeln(field, text) {
 	field.innerHTML += `<div class="text-line">${text}</div>`;
 }
 
+// function to render amount of tokens in top bar
 function renderTokens() {
 	const fromLocal = localStorage.getItem(tokens);
 	tokenField.innerHTML = fromLocal;
 }
 
+// add more tokens
 function addTokens(amount) {
 	const fromLocal = get_current_tokens();
 	localStorage.setItem(tokens, fromLocal + amount);
 	renderTokens();
 } 
 
+// get current amount of tokens (as int)
 function get_current_tokens() {
 	return parseInt(localStorage.getItem(tokens));
 }
@@ -126,12 +137,12 @@ function runRace(race) {
 	for (let i = 0; i < race.length; i++) {
 		writeln(feed, `${i+1}-${race[i].name}`);
 	}
-	payout_race(race);
-	// document.getElementById(`race-${curr_race}`).style.text-decoration = "line-through";
-	curr_race++;
-	betting_form(races[curr_race]);
+	payout_race(race); // payout any winnings
+	curr_race++; //increment current race
+	betting_form(races[curr_race]); // new betting form
 }
 
+// populate fields
 renderTokens();
 
 writeln(feed, "Welcome, one and all, to Dirt Hill Downs, the premier horse-racing simulation page.");
