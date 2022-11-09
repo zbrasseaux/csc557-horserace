@@ -90,7 +90,7 @@ const horses = [
 		race_position:0,
 		endurance_factor: 10
 	},{
-		name:"Day Old Coffe Grounds",
+		name:"Day Old Coffee Grounds",
 		avg_speed: 27,
 		color:"brown",
 		bet_position: 0,
