@@ -1,10 +1,11 @@
 :root {
 	--black:  #303030;
-	--orange: #ffb641;
+	--orange: #efa514;
 }
 
 body {
 	background: var(--black);
+	font-family: 'Courier New', monospace;
 }
 
 button {
@@ -21,25 +22,34 @@ button:hover {
 }
 
 .box {
-	display: flex;
-	width: 200px;
-	height: 200px;
+	width: 32.5vw;
+	height: 90vh;
+	float: left;
+	border-color: var(--orange);
+	border-width: .5px;
+	background-color: var(--black);
+	color: var(--orange);
+	padding-top: 10px;
+	border-style: solid;
+	overflow: scroll;
+}
+
+.box-text {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.text-line {
+	padding-bottom: 10px;
 }
 
 .wide {
 	height: 30px;
 	line-height: 30px;
-	width: 100%;
+	width: 97.75vw;
 /*	display: inline-flex;*/
 }
 
-.feed {
-	background-color: blue;
-}
-
-.upcoming {
-	background-color: red;
-}
 
 .ticker {
 	background-color: var(--orange);
