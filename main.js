@@ -14,6 +14,15 @@ for (let i=0; i<horses.length; i++) {
 	races[i%3].push(horses[i]);
 }
 
+function replenishFunds() {
+	if (get_current_tokens() < 100) {
+		writeln(feed, "You take out another mortgage on your home to pay for more bets.")
+		addTokens(500);
+	} else {
+		writeln(feed, "You have plenty of money, you don't need this.")
+	}
+}
+
 function writeln(field, text) {
 	field.innerHTML += `<div class="text-line">${text}</div>`;
 }
@@ -30,7 +39,7 @@ function addTokens(amount) {
 } 
 
 function get_current_tokens() {
-	return localStorage.getItem(tokens)
+	return parseInt(localStorage.getItem(tokens));
 }
 
 function betting_form(race) {
@@ -42,31 +51,34 @@ function betting_form(race) {
 			<input type="radio" name="horse-${i}" id="rd${i}-1" value="1"/> 1st
 			<input type="radio" name="horse-${i}" id="rd${i}-2" value="2"/> 2nd
 			<input type="radio" name="horse-${i}" id="rd${i}-3" value="3"/> 3rd
-			<input type="number" id="horse-${i}-bet">`);
+			<input type="number" id="horse-${i}-bet", value=0>`);
 		i++;
 	});
 	betting.innerHTML += "</form>";
-	betting.innerHTML += `<button onclick='process_bet(${races[curr_race]})'>Place Bet</button>`;
+	betting.innerHTML += `<button onclick='process_bet()'>Place Bet</button>`;
 }
 
-function process_bet(race) {
+function process_bet() {
 	let sum = 0;
 	let currval;
 	let grp_elements;
+	let race = races[curr_race];
 	for (let i = 0; i<race.length; i++) {
-		currval = document.getElementById(`horse-${i}-bet`).value;
+		currval = parseInt(document.getElementById(`horse-${i}-bet`).value);
 		sum += currval;
 		race[i].bet_amount = currval;
-		grp_elements = getElementsByName(`horse-${i}`);
+		grp_elements = document.getElementsByName(`horse-${i}`);
 		for(j = 0; j < grp_elements.length; j++) {
                 if(grp_elements[j].checked)
 	                race[i].bet_position = grp_elements[j].value;
         }
 	}
-	if (sum < get_current_tokens()) {
+	if (sum > get_current_tokens()) {
+		console.log(sum);
 		writeln(betting, "Bets exceed current funds.");
 		return;
 	} else {
+		addTokens(-sum);
 		runRace(race);
 	}
 
@@ -93,7 +105,7 @@ function runRace(race) {
 	writeln(feed, "<br/>And we are off!")
 	for (i=0; i<segments-1; i++) {
 		race.forEach((horse) => {
-			horse.race_position += horse.avg_speed + (Math.random* (2*horse.speed_range)-horse.speed_range) - ((horse.endurance_factor/25)*(i/segments));
+			horse.race_position += horse.avg_speed + (Math.random()* (2*horse.speed_range)-horse.speed_range) - ((horse.endurance_factor/25)*(i/segments));
 		});
 
 		race.sort((horse_a, horse_b) => (horse_b.race_position - horse_a.race_position));
@@ -105,7 +117,7 @@ function runRace(race) {
 	});
 	race.sort((horse_a, horse_b) => (horse_b.race_position - horse_a.race_position));
 	writeln(feed, "And there we have it, folks!");
-	writeln(feed, `And the winner is... ${race[0]} is the winner! ${race[1]} is in second and ${race[2]} rounds it out in third.`);
+	writeln(feed, `And the winner is... ${race[0].name} is the winner! ${race[1].name} is in second and ${race[2].name} rounds it out in third.`);
 	writeln(feed, "Here are the final standings:");
 	race.forEach((horse)=>{
 		writeln(upcoming, horse['name']);
