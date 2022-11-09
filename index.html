@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<head>
+			<!-- top ticker bar -->
 			<div class="wide ticker">
 				<div class="ticker-item">Welcome to Dirt Hill Downs</div>
 				<div class="ticker-item" id="current_date"></div>
@@ -14,22 +15,27 @@
 				<div class="ticker-item" id="race_1"></div>
 				<div class="ticker-item" id="race_2"></div>
 			</div>
+			<!-- add current date to ticker bar -->
 			<script type="text/javascript">
 				const local_date = new Date();
 				document.getElementById("current_date").innerHTML = "Today is "+(local_date.getMonth()+1)+"-"+local_date.getDate();
 			</script>
 		</head>
-
+		<!-- container for all text fields -->
 		<div class="box-container">
 			<div class="box">
-				<div class=box-text id="upcoming"></div>
+				<!-- scheduled races -->
+				<div class=box-text id="upcoming"></div> 
 			</div>
 			<div class="box">
+				<!-- live feed of races -->
 				<div class=box-text id="feed"></div>
 			</div>
 			<div class="box">
+				<!-- betting field -->
 				<div class=box-text>
 					<div>Current Tokens: <span id="tokens"></span><div id="betting"></div></div>
+					<button onclick="replenishFunds()">Beg for money</button>
 				</div>
 			</div>
 		</div>
