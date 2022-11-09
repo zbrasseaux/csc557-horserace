@@ -1,3 +1,9 @@
+/*<!-- Zachary Brasseaux -->
+<!-- Partner - Josue Gaona -->
+<!-- 102-52-903 -->
+<!-- CSC 557 - Web Dev -->
+<!-- General Project -->*/
+
 const horses = [
 	{
 		name:"Orb",
