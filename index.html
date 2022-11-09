@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="./main.css"/>
+		<script type="text/javascript" src="./horses.js"></script>
 	</head>
 	<body>
 		<head>
@@ -19,7 +20,19 @@
 			</script>
 		</head>
 
-		<div class="box feed"></div>
-		<div class="box upcoming"></div>
+		<div class="box-container">
+			<div class="box">
+				<div class=box-text id="upcoming"></div>
+			</div>
+			<div class="box">
+				<div class=box-text id="feed"></div>
+			</div>
+			<div class="box">
+				<div class=box-text id="betting">
+					<div>Current Tokens: <span id="tokens"></span></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="./main.js"></script>
 	</body>
 </html>
